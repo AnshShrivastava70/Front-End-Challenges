@@ -31,8 +31,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/AnshShrivastava70/Front-End-Challenges/tree/main/social-links-profile-main)
-- Live Site URL: [Add live site URL here](https://anshshrivastava70.github.io/Front-End-Challenges/social-links/)
+- Solution URL: [social-links-profile-main](https://github.com/AnshShrivastava70/Front-End-Challenges/tree/main/social-links-profile-main)
+- Live Site URL: [social-links](https://anshshrivastava70.github.io/Front-End-Challenges/social-links/)
 
 
 ## My Process
