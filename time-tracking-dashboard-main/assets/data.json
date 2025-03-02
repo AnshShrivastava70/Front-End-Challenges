@@ -1,0 +1,122 @@
+[
+  {
+    "title": "Work",
+    "timeframes": {
+      "daily": {
+        "current": 5,
+        "previous": 7,
+        "previousKey": "Yesterday"
+      },
+      "weekly": {
+        "current": 32,
+        "previous": 36,
+        "previousKey": "Last Week"
+      },
+      "monthly": {
+        "current": 103,
+        "previous": 128,
+        "previousKey": "Last Month"
+      }
+    }
+  },
+  {
+    "title": "Play",
+    "timeframes": {
+      "daily": {
+        "current": 1,
+        "previous": 2,
+        "previousKey": "Yesterday"
+      },
+      "weekly": {
+        "current": 10,
+        "previous": 8,
+        "previousKey": "Last Week"
+      },
+      "monthly": {
+        "current": 23,
+        "previous": 29,
+        "previousKey": "Last Month"
+      }
+    }
+  },
+  {
+    "title": "Study",
+    "timeframes": {
+      "daily": {
+        "current": 0,
+        "previous": 1,
+        "previousKey": "Yesterday"
+      },
+      "weekly": {
+        "current": 4,
+        "previous": 7,
+        "previousKey": "Last Week"
+      },
+      "monthly": {
+        "current": 13,
+        "previous": 19,
+        "previousKey": "Last Month"
+      }
+    }
+  },
+  {
+    "title": "Exercise",
+    "timeframes": {
+      "daily": {
+        "current": 1,
+        "previous": 1,
+        "previousKey": "Yesterday"
+      },
+      "weekly": {
+        "current": 4,
+        "previous": 5,
+        "previousKey": "Last Week"
+      },
+      "monthly": {
+        "current": 11,
+        "previous": 18,
+        "previousKey": "Last Month"
+      }
+    }
+  },
+  {
+    "title": "Social",
+    "timeframes": {
+      "daily": {
+        "current": 1,
+        "previous": 3,
+        "previousKey": "Yesterday"
+      },
+      "weekly": {
+        "current": 5,
+        "previous": 10,
+        "previousKey": "Last Week"
+      },
+      "monthly": {
+        "current": 21,
+        "previous": 23,
+        "previousKey": "Last Month"
+      }
+    }
+  },
+  {
+    "title": "Self Care",
+    "timeframes": {
+      "daily": {
+        "current": 0,
+        "previous": 1,
+        "previousKey": "Yesterday"
+      },
+      "weekly": {
+        "current": 2,
+        "previous": 2,
+        "previousKey": "Last Week"
+      },
+      "monthly": {
+        "current": 7,
+        "previous": 11,
+        "previousKey": "Last Month"
+      }
+    }
+  }
+]
