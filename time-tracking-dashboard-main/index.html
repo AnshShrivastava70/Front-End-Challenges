@@ -107,17 +107,21 @@
           "bg-[#f1c65b] bg-[url('/assets/images/icon-self-care.svg')]",
       };
 
-      document.addEventListener("DOMContentLoaded", () => {
-        changeTimeFrame("weekly"); // Set "Weekly" as default
+      document.addEventListener("DOMContentLoaded", async () => {
+        await fetchData();
+        changeTimeFrame("weekly", false); // Set "Weekly" as default
       });
 
       async function fetchData() {
         try {
           const response = await fetch("./assets/data.json");
           jsonData = await response.json();
-          console.log(jsonData);
+          generateCards();
         } catch (error) {
           console.error("Error Fetching Data: ", error);
+          document.getElementById("gridContainer").innerHTML = `
+      <p class="text-red-500 text-center">Failed to load data. Please try again later.</p>
+    `;
         }
       }
 
@@ -171,7 +175,7 @@
         });
       }
 
-      function changeTimeFrame(timeframe) {
+      function changeTimeFrame(timeframe, shouldGenerate = true) {
         currentTimeframe = timeframe;
         const navItems = document.querySelectorAll("nav ul li");
         navItems.forEach((item) => {
@@ -183,10 +187,8 @@
           activeButton.classList.add("text-white");
           activeButton.classList.remove("text-opacity-40");
         }
-        generateCards();
+        if (shouldGenerate) generateCards();
       }
-
-      fetchData();
     </script>
   </body>
 </html>
