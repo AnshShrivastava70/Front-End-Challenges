@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32-DQjEQYWa.png"
+    />
+
+    <title>Frontend Mentor | Time tracking dashboard</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution {
+        background: #000;
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+    <link rel="stylesheet" crossorigin href="/assets/index-DsZToXWm.css">
+  </head>
+  <body>
+    <main
+      class="w-full h-auto md:h-screen grid place-items-center bg-black font-[Rubik]"
+    >
+      <section
+        id="gridContainer"
+        class="grid grid-flow-row md:grid-flow-row h-auto grid-cols-1 md:grid-cols-4 md:grid-rows-2 place-items-center gap-4 md:gap-6 m-4 md:mx-24"
+      >
+        <header class="w-full md:h-full bg-[#1d204b] rounded-xl md:row-span-2">
+          <div
+            id="profile"
+            class="flex md:flex-col h-[70%] py-6 px-8 space-x-3 md:space-y-3 md:space-x-0 bg-[#5746ea] rounded-xl"
+          >
+            <div>
+              <img
+                class="h-20 border-[3px] rounded-full"
+                src="/assets/image-jeremy-CA1woC3-.png"
+                alt="Profile-image"
+              />
+            </div>
+            <div
+              class="flex flex-col justify-center md:justify-start md:items-start md:py-6"
+            >
+              <p class="text-slate-300 text-sm font-medium opacity-65">
+                Report for
+              </p>
+              <h2 class="text-white text-2xl md:text-4xl font-extralight">
+                Jeremy Robson
+              </h2>
+            </div>
+          </div>
+
+          <nav class="px-6 py-5">
+            <ul
+              class="grid grid-flow-col md:grid-flow-row md:gap-2 list-none text-white text-opacity-40 justify-between"
+            >
+              <li id="daily" class="hover:text-white">
+                <button onclick="changeTimeFrame('daily')">Daily</button>
+              </li>
+              <li id="weekly" class="hover:text-white">
+                <button onclick="changeTimeFrame('weekly')">Weekly</button>
+              </li>
+              <li id="monthly" class="hover:text-white">
+                <button onclick="changeTimeFrame('monthly')">Monthly</button>
+              </li>
+            </ul>
+          </nav>
+        </header>
+      </section>
+    </main>
+
+    <footer class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by
+      <a href="#https://www.frontendmentor.io/profile/AnshShrivastava70"
+        >AnshShrivastava70</a
+      >.
+    </footer>
+
+    <script>
+      let jsonData = [];
+      let currentTimeframe = "weekly";
+
+      let cardStyles = {
+        Work: "bg-[#ff8c66] bg-[url('/assets/images/icon-work.svg')] ",
+        Play: "bg-[#56c2e6] bg-[url('/assets/images/icon-play.svg')]",
+        Study: " bg-[#ff5c7c] bg-[url('/assets/images/icon-study.svg')]",
+        Exercise: "bg-[#4acf81] bg-[url('/assets/images/icon-exercise.svg')]",
+        Social: "bg-[#7536d3] bg-[url('/assets/images/icon-social.svg')]",
+        "Self Care":
+          "bg-[#f1c65b] bg-[url('/assets/images/icon-self-care.svg')]",
+      };
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        await fetchData();
+        changeTimeFrame("weekly", false); // Set "Weekly" as default
+      });
+
+      async function fetchData() {
+        try {
+          const response = await fetch("./data.json");
+          jsonData = await response.json();
+          generateCards();
+        } catch (error) {
+          console.error("Error Fetching Data: ", error);
+          document.getElementById("gridContainer").innerHTML = `
+      <p class="text-red-500 text-center">Failed to load data. Please try again later.</p>
+    `;
+        }
+      }
+
+      // Generate Cards Dynamically
+
+      function generateCards() {
+        const container = document.getElementById("gridContainer");
+        container.querySelectorAll("article").forEach((card) => card.remove());
+
+        jsonData.forEach((item) => {
+          const { title, timeframes } = item;
+          if (!timeframes || !timeframes[currentTimeframe]) return;
+
+          const current = item.timeframes[currentTimeframe].current;
+          const previous = item.timeframes[currentTimeframe].previous;
+          const previousKey = item.timeframes[currentTimeframe].previousKey;
+
+          // Get Tailwind classes for this card
+          const bgClass = cardStyles[title] || "bg-indigo-400";
+
+          const card = document.createElement("article");
+          card.className = `w-full ${bgClass} bg-no-repeat bg-right-top rounded-xl`;
+
+          card.innerHTML = `
+        <div class="h-12"></div>
+          <div
+            class="grid grid-cols-2 grid-flow-row md:grid-flow-col md:grid-rows-3 gap-2 md:gap-1 bg-[#1d204b] hover:bg-[#34397b] text-white py-6 md:p-4 rounded-xl transition duration-300 cursor-pointer"
+          >
+            <header
+              class="col-span-2 flex justify-between items-center px-6 md:px-3"
+            >
+              <h3 class="text-lg">${title}</h3>
+              <button class="p-1 group">
+                <img class="group-hover:brightness-200 group-hover:contrast-200 transition duration-300" src="./icon-ellipsis.svg" alt="menu" />
+              </button>
+            </header>
+            <p
+              class="col-span-1 md:col-span-2 text-3xl md:text-5xl font-extralight px-6 md:px-3"
+            >
+              ${current}hrs.
+            </p>
+            <footer
+              class="col-span-1 md:col-span-2 flex justify-end md:justify-start items-center md:items-center text-xs md:text-sm opacity-50 px-5 md:px-3"
+            >
+              ${previousKey} - ${previous}hrs.
+            </footer>
+          </div>
+        `;
+
+          container.appendChild(card);
+        });
+      }
+
+      function changeTimeFrame(timeframe, shouldGenerate = true) {
+        currentTimeframe = timeframe;
+        const navItems = document.querySelectorAll("nav ul li");
+        navItems.forEach((item) => {
+          item.classList.remove("text-white");
+          item.classList.add("text-opacity-40", "transition", "duration-300");
+        });
+        const activeButton = document.getElementById(timeframe);
+        if (activeButton) {
+          activeButton.classList.add("text-white");
+          activeButton.classList.remove("text-opacity-40");
+        }
+        if (shouldGenerate) generateCards();
+      }
+    </script>
+  </body>
+</html>

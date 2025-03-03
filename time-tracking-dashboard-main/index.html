@@ -114,7 +114,7 @@
 
       async function fetchData() {
         try {
-          const response = await fetch("./assets/data.json");
+          const response = await fetch("./data.json");
           jsonData = await response.json();
           generateCards();
         } catch (error) {
@@ -155,7 +155,7 @@
             >
               <h3 class="text-lg">${title}</h3>
               <button class="p-1 group">
-                <img class="group-hover:brightness-200 group-hover:contrast-200 transition duration-300" src="./assets/images/icon-ellipsis.svg" alt="menu" />
+                <img class="group-hover:brightness-200 group-hover:contrast-200 transition duration-300" src="./icon-ellipsis.svg" alt="menu" />
               </button>
             </header>
             <p
